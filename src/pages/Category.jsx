@@ -1,7 +1,8 @@
 import React from 'react'
+import CategoryTable from '../components/CategoryTable'
 
 export const Category = () => {
   return (
-    <div>Category</div>
+    <div><CategoryTable /></div>
   )
 }
