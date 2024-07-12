@@ -6,7 +6,7 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/system';
 import { useDispatch, useSelector } from 'react-redux';
-import { createCompany, createProduct, updateCompany } from '../redux/product/product.slice';
+import { createProduct } from '../redux/product/product.slice';
 import { MenuItem, Select, InputLabel, FormControl } from '@mui/material';
 
 const style = {

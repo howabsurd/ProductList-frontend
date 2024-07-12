@@ -6,14 +6,20 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@mui/material';
 import ProductModel from './productModel';
+import { deleteProduct } from '../redux/product/product.slice';
 
 export default function ProductTable() {
+    const dispatch = useDispatch();
   const rows = useSelector(state => state.product.data)
   const [newProduct , setNewProduct ] = React.useState({});
     const [open , setOpen] = React.useState(false);
+
+    const handleDelete = (id) => {
+        dispatch(deleteProduct(id));
+    }
 
   return (
     <>
@@ -45,7 +51,7 @@ export default function ProductTable() {
               <TableCell align="right">{row?.categoryId}</TableCell>
               <TableCell align="right">{row?.typeofGoodId}</TableCell>
               <TableCell align="right"><Button variant='contained' color='primary'>Edit</Button>
-               <Button variant='contained' color='warning' >Delete</Button></TableCell>
+               <Button variant='contained' color='warning' onClick={() => handleDelete(row.id)} >Delete</Button></TableCell>
             </TableRow>
           ))}
         </TableBody>
