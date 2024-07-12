@@ -1,8 +1,11 @@
 import React from 'react'
+import GoodTable from '../components/GoodTable'
 
 const Good = () => {
   return (
-    <div>Good</div>
+    <div>
+      <GoodTable />
+    </div>
   )
 }
 

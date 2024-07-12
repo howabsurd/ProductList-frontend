@@ -26,12 +26,12 @@ function App() {
     dispatch(fetchCompany())
   }, [dispatch])
 
-  // useEffect(()=>{
-  //   console.log(products)
-  //   console.log(categories);
-  //   console.log(goods)
-  //   console.log(companies)
-  // },[products, categories, goods, companies])
+  useEffect(()=>{
+    console.log(products)
+    console.log(categories);
+    console.log(goods)
+    console.log(companies)
+  },[products, categories, goods, companies])
 
   return (
     <div className="App">
