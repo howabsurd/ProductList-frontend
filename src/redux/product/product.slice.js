@@ -18,6 +18,24 @@ export const fetchProducts = createAsyncThunk(
     }
   ); 
 
+
+  export const createProduct = createAsyncThunk(
+    "product/createProducts",
+    async (data) => {
+      const response = await axios.post("http://localhost:4700/api/product/new", {...data, costPrice : parseInt(data.costPrice), sellingPrice : parseInt(data.sellingPrice) , "images": { 
+        "main": "https://example.com/image.jpg",
+        "additional": ["https://example.com/image2.jpg", "https://example.com/image3.jpg"]
+      },
+      "createdAt": "2024-07-05T08:00:00Z",
+      "attributes": {
+        "color": "Red",
+        "size": "Large"
+      }});
+      console.log(response.data)
+      return response.data;
+    }
+  ); 
+
 const productReducer = createSlice({
     name : "product",
     initialState,
@@ -31,9 +49,21 @@ const productReducer = createSlice({
           })
           .addCase(fetchProducts.fulfilled, (state, action) => {
             state.status = 'succeeded';
-            state.data = action.payload;
+            state.data = action.payload.product;
           })
           .addCase(fetchProducts.rejected, (state, action) => {
+            state.status = 'failed';
+            state.error = action.error.message;
+          });
+          builder
+          .addCase(createProduct.pending, (state) => {
+            state.status = 'loading';
+          })
+          .addCase(createProduct.fulfilled, (state, action) => {
+            state.status = 'succeeded';
+            state.data.push(action.payload.product);
+          })
+          .addCase(createProduct.rejected, (state, action) => {
             state.status = 'failed';
             state.error = action.error.message;
           });
