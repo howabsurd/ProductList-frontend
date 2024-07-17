@@ -50,7 +50,8 @@ export default function ProductTable() {
               <TableCell align="right">{row?.companyId}</TableCell>
               <TableCell align="right">{row?.categoryId}</TableCell>
               <TableCell align="right">{row?.typeofGoodId}</TableCell>
-              <TableCell align="right"><Button variant='contained' color='primary'>Edit</Button>
+              <TableCell align="right">
+                {/* <Button variant='contained' color='primary'>Edit</Button> */}
                <Button variant='contained' color='warning' onClick={() => handleDelete(row.id)} >Delete</Button></TableCell>
             </TableRow>
           ))}

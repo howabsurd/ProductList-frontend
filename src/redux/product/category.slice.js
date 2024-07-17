@@ -1,6 +1,7 @@
 import  {createSlice}  from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { backendURI, env } from "../../config/keys";
 
 
 
@@ -13,14 +14,14 @@ const initialState = {
 
 export const updateCategory = createAsyncThunk("category/updateCategory", async (data)=>{
   console.log(data, "use Data")
-  const response = await axios.put(`http://localhost:4700/api/category/${data.category_id}`, data)
+  const response = await axios.put(`${backendURI[env]}/api/category/${data.category_id}`, data)
   return response.data;
 })
 
 export const createCategory = createAsyncThunk(
   "category/createCategory",
   async (data) => {
-    const response = await axios.post("http://localhost:4700/api/category/new", data);
+    const response = await axios.post(`${backendURI[env]}/api/category/new`, data);
     return response.data;
   }
 ); 
@@ -28,13 +29,13 @@ export const createCategory = createAsyncThunk(
 export const fetchCategory = createAsyncThunk(
     "category/fetchCategory",
     async () => {
-      const response = await axios.get("http://localhost:4700/api/category/all");
+      const response = await axios.get(`${backendURI[env]}/api/category/all`);
       return response.data;
     }
   ); 
 
 export const deleteCategory = createAsyncThunk("category/deleteCategory", async(data)=>{
-    const response = await axios.delete(`http://localhost:4700/api/category/${data}`)
+    const response = await axios.delete(`${backendURI[env]}/api/category/${data}`)
     return response.data;
 })
 
