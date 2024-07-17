@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  data: JSON.parse(localStorage.getItem('user')) || [],
+  data: JSON.parse(localStorage.getItem('user')) || null,
   status: 'idle',
   error: null
 }
@@ -60,7 +60,7 @@ const userSlice = createSlice({
       })
       .addCase(SignupUser.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.data.push(action.payload);
+        state.data =action.payload;
       })
       .addCase(SignupUser.rejected, (state, action) => {
         state.status = 'failed';

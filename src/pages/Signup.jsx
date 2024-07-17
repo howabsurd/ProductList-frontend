@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Container, Box, TextField, Button, Typography } from '@mui/material';
-import { LoginUser } from '../redux/product/user.slice';
+import { LoginUser, SignupUser } from '../redux/product/user.slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-function Login() {
+function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { data , status, error } = useSelector(state => state.user);
@@ -13,7 +13,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log({ email, password });
-    dispatch(LoginUser({email, password}));
+    dispatch(SignupUser({email, password}));
     setEmail("");
     setPassword("");
   };
@@ -29,7 +29,7 @@ function Login() {
         }}
       >
         <Typography component="h1" variant="h5">
-          Login
+          Sign Up
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
@@ -70,11 +70,11 @@ function Login() {
           {error && <Typography color="error">{error}</Typography>}
         </Box>
       </Box>
-      <Link to="/signup">
-      <Typography>Not a User</Typography> 
+      <Link to="/login">
+      <Typography>Already A User</Typography> 
       </Link>
     </Container>
   );
 }
 
-export default Login;
+export default SignUp;

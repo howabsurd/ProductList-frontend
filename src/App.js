@@ -13,6 +13,7 @@ import Company from './pages/Company';
 import Good from './pages/Good';
 import Login from './pages/Login';
 import { loadUserFromStorage } from './redux/product/user.slice';
+import SignUp from './pages/Signup';
 
 function App() {
   const dispatch = useDispatch();
@@ -50,6 +51,7 @@ function App() {
       </nav>
       <Routes>
       <Route path='/login' element={!user ? <Login /> : <Navigate to="/"/>} />
+      <Route path='/signup' element={ <SignUp />}  />
       <Route path='/' element={user ? <Home /> : <Navigate to="/login"/>} />
         <Route  path='/category' element = {user  ? <Category /> : <Navigate to="/login"/>} />
         <Route  path='/company' element = {user ? <Company /> : <Navigate to="/login"/>} />
