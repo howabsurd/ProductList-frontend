@@ -1,6 +1,7 @@
 import  {createSlice}  from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { env, backendURI } from "../../config/keys";
 
 
 
@@ -13,14 +14,14 @@ const initialState = {
 
 export const updateGood = createAsyncThunk("Good/updateGood", async (data)=>{
   console.log(data, "use Data")
-  const response = await axios.put(`http://localhost:4700/api/good/${data.typeid}`, data)
+  const response = await axios.put(`${backendURI[env]}/api/good/${data.typeid}`, data)
   return response.data;
 })
 
 export const createGood = createAsyncThunk(
   "Good/createGood",
   async (data) => {
-    const response = await axios.post("http://localhost:4700/api/good/new", data);
+    const response = await axios.post(`${backendURI[env]}/api/good/new`, data);
     return response.data;
   }
 ); 
@@ -28,14 +29,14 @@ export const createGood = createAsyncThunk(
 export const fetchGood = createAsyncThunk(
     "Good/fetchGood",
     async () => {
-      const response = await axios.get("http://localhost:4700/api/good/all");
+      const response = await axios.get(`${backendURI[env]}/api/good/all`);
       return response.data;
     }
   ); 
 
 export const deleteGood = createAsyncThunk("Good/deleteGood", async(data)=>{
   console.log("delete ID :", data)
-    const response = await axios.delete(`http://localhost:4700/api/good/${data}`)
+    const response = await axios.delete(`${backendURI[env]}/api/good/${data}`)
     return response.data;
 })
 

@@ -1,6 +1,7 @@
 import  {createSlice}  from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { backendURI, env } from "../../config/keys";
 
 
 
@@ -13,14 +14,14 @@ const initialState = {
 
 export const updateCompany = createAsyncThunk("company/updateCompany", async (data)=>{
   console.log(data, "use Data")
-  const response = await axios.put(`http://localhost:4700/api/company/${data.company_id}`, data)
+  const response = await axios.put(`${backendURI[env]}/api/company/${data.company_id}`, data)
   return response.data;
 })
 
 export const createCompany = createAsyncThunk(
   "company/createCompany",
   async (data) => {
-    const response = await axios.post("http://localhost:4700/api/company/new", data);
+    const response = await axios.post(`${backendURI[env]}/api/company/new`, data);
     return response.data;
   }
 ); 
@@ -28,13 +29,13 @@ export const createCompany = createAsyncThunk(
 export const fetchCompany = createAsyncThunk(
     "company/fetchCompany",
     async () => {
-      const response = await axios.get("http://localhost:4700/api/company/all");
+      const response = await axios.get(`${backendURI[env]}/api/company/all`);
       return response.data;
     }
   ); 
 
 export const deleteCompany = createAsyncThunk("company/deleteCompany", async(data)=>{
-    const response = await axios.delete(`http://localhost:4700/api/company/${data}`)
+    const response = await axios.delete(`${backendURI[env]}/api/company/${data}`)
     return response.data;
 })
 

@@ -1,6 +1,7 @@
 import  {createSlice}  from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { env, backendURI } from "../../config/keys";
 
 
 
@@ -13,7 +14,7 @@ const initialState = {
 export const fetchProducts = createAsyncThunk(
     "product/fetchProducts",
     async () => {
-      const response = await axios.get("http://localhost:4700/api/product/all");
+      const response = await axios.get(`${backendURI[env]}/api/product/all`);
       return response.data;
     }
   ); 
@@ -22,7 +23,7 @@ export const fetchProducts = createAsyncThunk(
   export const createProduct = createAsyncThunk(
     "product/createProducts",
     async (data) => {
-      const response = await axios.post("http://localhost:4700/api/product/new", {...data, costPrice : parseInt(data.costPrice), sellingPrice : parseInt(data.sellingPrice) , "images": { 
+      const response = await axios.post(`${backendURI[env]}/api/product/new`, {...data, costPrice : parseInt(data.costPrice), sellingPrice : parseInt(data.sellingPrice) , "images": { 
         "main": "https://example.com/image.jpg",
         "additional": ["https://example.com/image2.jpg", "https://example.com/image3.jpg"]
       },
@@ -38,7 +39,7 @@ export const fetchProducts = createAsyncThunk(
 
 
   export const deleteProduct = createAsyncThunk("product/deleteProduct", async(data)=>{
-    const response = await axios.delete(`http://localhost:4700/api/product/${data}`);
+    const response = await axios.delete(`${backendURI[env]}/api/product/${data}`);
     return response.data;
   })
 
