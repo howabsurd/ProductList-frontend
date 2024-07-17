@@ -3,6 +3,7 @@ import categorySlice from "./product/category.slice";
 import productSlice from "./product/product.slice";
 import goodSlice from "./product/good.slice";
 import companySlice from "./product/company.slice";
+import userSlice from "./product/user.slice";
 
 
 export const store = configureStore({
@@ -10,6 +11,7 @@ export const store = configureStore({
         product : productSlice,
         category : categorySlice,
         good : goodSlice,
-        company : companySlice
+        company : companySlice,
+        user : userSlice,
     }
 })
