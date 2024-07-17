@@ -6,11 +6,14 @@ import { fetchCategory } from './redux/product/category.slice';
 import { fetchGood } from './redux/product/good.slice';
 import { fetchCompany } from './redux/product/company.slice';
 import Home from './pages/Home';
-import { BrowserRouter , Route, Routes } from 'react-router-dom';
+import { BrowserRouter , Navigate, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import { Category } from './pages/Category';
 import Company from './pages/Company';
 import Good from './pages/Good';
+import Login from './pages/Login';
+import { loadUserFromStorage } from './redux/product/user.slice';
+import SignUp from './pages/Signup';
 
 function App() {
   const dispatch = useDispatch();
@@ -18,6 +21,12 @@ function App() {
   const categories = useSelector(state =>  state.category.data);
   const goods = useSelector(state => state.good.data )
   const companies = useSelector(state => state.company.data);
+  const user = useSelector((state) => state.user.data);
+
+  useEffect(() => {
+    dispatch(loadUserFromStorage());
+  }, [dispatch]);
+
 
   useEffect(()=>{
     dispatch(fetchProducts());
@@ -31,7 +40,8 @@ function App() {
     console.log(categories);
     console.log(goods)
     console.log(companies)
-  },[products, categories, goods, companies])
+    console.log("XXX", user)
+  },[products, categories, goods, companies, user])
 
   return (
     <div className="App">
@@ -40,10 +50,12 @@ function App() {
         <Navbar />
       </nav>
       <Routes>
-        <Route exact path='/' element = {<Home />} />
-        <Route  path='/category' element = {<Category />} />
-        <Route  path='/company' element = {<Company />} />
-        <Route  path='/good' element = {<Good />} />
+      <Route path='/login' element={!user ? <Login /> : <Navigate to="/"/>} />
+      <Route path='/signup' element={ <SignUp />}  />
+      <Route path='/' element={user ? <Home /> : <Navigate to="/login"/>} />
+        <Route  path='/category' element = {user  ? <Category /> : <Navigate to="/login"/>} />
+        <Route  path='/company' element = {user ? <Company /> : <Navigate to="/login"/>} />
+        <Route  path='/good' element = {user ? <Good /> : <Navigate to="/login"/>} />
         </Routes>
         </BrowserRouter>
     </div>

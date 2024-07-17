@@ -13,11 +13,14 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logout } from '../redux/product/user.slice';
 
 const pages = [['Company', '/company'], ['Category', '/category'], ['Good', '/good']];
 const settings = ['Logout'];
 
 function ResponsiveAppBar() {
+  const dispatch = useDispatch();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -33,6 +36,7 @@ function ResponsiveAppBar() {
   };
 
   const handleCloseUserMenu = () => {
+    dispatch(logout())
     setAnchorElUser(null);
   };
 
