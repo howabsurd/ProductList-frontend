@@ -1,5 +1,5 @@
 export const backendURI = {
-    "production" : "http://localhost:4700",
+    "production" : "https://product-list-backend.vercel.app",
     "development" : "http://localhost:4700",
     "testing" : ""
 }
