@@ -12,7 +12,6 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ email, password });
     dispatch(LoginUser({email, password}));
     setEmail("");
     setPassword("");
