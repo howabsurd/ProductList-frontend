@@ -56,6 +56,9 @@ const userSlice = createSlice({
       localStorage.removeItem('user');
       state.data = null;
       state.status = 'idle';
+    },
+    clearError(state) {
+      state.error = null;
     }
   },
   extraReducers: (builder) => {
@@ -86,7 +89,7 @@ const userSlice = createSlice({
   }
 });
 
-export const { loadUserFromStorage, logout } = userSlice.actions;
+export const { loadUserFromStorage, logout, clearError } = userSlice.actions;
 
 export default userSlice.reducer;
 
