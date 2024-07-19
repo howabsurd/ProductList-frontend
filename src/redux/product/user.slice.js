@@ -10,21 +10,36 @@ const initialState = {
 
 export const LoginUser = createAsyncThunk(
   "user/login",
-  async (userCredentials) => {
-    const response = await axios.post(`${authURI[env]}/api/login`, userCredentials);
-    localStorage.setItem('user', JSON.stringify(response.data));
-    return response.data;
+  async (userCredentials, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(`${authURI[env]}/api/login`, userCredentials);
+      localStorage.setItem('user', JSON.stringify(response.data));
+      return response.data;
+    } catch (err) {
+      if (err.response && err.response.data && err.response.data.error) {
+        return rejectWithValue(err.response.data.error);
+      }
+      return rejectWithValue(err.message);
+    }
   }
 );
 
 export const SignupUser = createAsyncThunk(
   "user/signup",
-  async (userCredentials) => {
-    const response = await axios.post(`${authURI[env]}/api/signup`, userCredentials);
-    localStorage.setItem('user', JSON.stringify(response.data));
-    return response.data;
+  async (userCredentials, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(`${authURI[env]}/api/signup`, userCredentials);
+      localStorage.setItem('user', JSON.stringify(response.data));
+      return response.data;
+    } catch (err) {
+      if (err.response && err.response.data && err.response.data.error) {
+        return rejectWithValue(err.response.data.error);
+      }
+      return rejectWithValue(err.message);
+    }
   }
 );
+
 
 const userSlice = createSlice({
   name: "user",
@@ -47,6 +62,7 @@ const userSlice = createSlice({
     builder
       .addCase(LoginUser.pending, (state) => {
         state.status = 'loading';
+        state.error = null;
       })
       .addCase(LoginUser.fulfilled, (state, action) => {
         state.status = 'succeeded';
@@ -54,18 +70,18 @@ const userSlice = createSlice({
       })
       .addCase(LoginUser.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.error.message;
+        state.error = action.payload || action.error.message;
       })
       .addCase(SignupUser.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(SignupUser.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.data =action.payload;
+        state.data = action.payload;
       })
       .addCase(SignupUser.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.error.message;
+        state.error = action.payload || action.error.message;
       });
   }
 });
@@ -73,3 +89,4 @@ const userSlice = createSlice({
 export const { loadUserFromStorage, logout } = userSlice.actions;
 
 export default userSlice.reducer;
+

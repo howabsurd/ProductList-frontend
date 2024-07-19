@@ -7,12 +7,11 @@ import { Link } from 'react-router-dom';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { data , status, error } = useSelector(state => state.user);
+  const { status, error } = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ email, password });
     dispatch(LoginUser({email, password}));
     setEmail("");
     setPassword("");
@@ -64,6 +63,7 @@ function Login() {
             variant="contained"
             color="primary"
             sx={{ mt: 3, mb: 2 }}
+            disabled= {status ==="loading"}
           >
             Submit
           </Button>

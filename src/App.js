@@ -17,16 +17,11 @@ import SignUp from './pages/Signup';
 
 function App() {
   const dispatch = useDispatch();
-  const products = useSelector(state => state.product.data);
-  const categories = useSelector(state =>  state.category.data);
-  const goods = useSelector(state => state.good.data )
-  const companies = useSelector(state => state.company.data);
   const user = useSelector((state) => state.user.data);
 
   useEffect(() => {
     dispatch(loadUserFromStorage());
   }, [dispatch]);
-
 
   useEffect(()=>{
     dispatch(fetchProducts());
@@ -35,13 +30,6 @@ function App() {
     dispatch(fetchCompany())
   }, [dispatch])
 
-  useEffect(()=>{
-    console.log(products)
-    console.log(categories);
-    console.log(goods)
-    console.log(companies)
-    console.log("XXX", user)
-  },[products, categories, goods, companies, user])
 
   return (
     <div className="App">
