@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { error } = useSelector(state => state.user);
+  const { status, error } = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
@@ -64,6 +64,7 @@ function SignUp() {
             variant="contained"
             color="primary"
             sx={{ mt: 3, mb: 2 }}
+            disabled= {status ==="loading"}
           >
             Submit
           </Button>
