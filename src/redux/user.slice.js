@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import {env, authURI} from "../../config/keys"
+import {env, authURI} from "../config/keys"
 
 const initialState = {
   data: JSON.parse(localStorage.getItem('user')) || null,

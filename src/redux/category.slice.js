@@ -1,7 +1,7 @@
 import  {createSlice}  from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { backendURI, env } from "../../config/keys";
+import { backendURI, env } from "../config/keys";
 
 
 

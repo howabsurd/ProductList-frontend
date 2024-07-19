@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@mui/material';
-import { deleteCompany, updateCompany } from '../redux/product/company.slice';
+import { deleteCompany, updateCompany } from '../redux/company.slice';
 import CompanyModal from './CompanyModel';
 
 export default function CompanyTable() {

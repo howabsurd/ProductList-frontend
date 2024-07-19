@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { logout } from '../redux/product/user.slice';
+import { logout } from '../redux/user.slice';
 
 const pages = [['Company', '/company'], ['Category', '/category'], ['Good', '/good']];
 const settings = ['Logout'];

@@ -6,7 +6,7 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/system';
 import { useDispatch } from 'react-redux';
-import { createCategory, updateCategory } from '../redux/product/category.slice';
+import { createCategory, updateCategory } from '../redux/category.slice';
 
 const style = {
   position: 'absolute',

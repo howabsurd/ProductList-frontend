@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@mui/material';
-import { deleteCategory, updateCategory } from '../redux/product/category.slice';
+import { deleteCategory, updateCategory } from '../redux/category.slice';
 import CategoryModal from './CategoryModel';
 
 export default function CategoryTable() {

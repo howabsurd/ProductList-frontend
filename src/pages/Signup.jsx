@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Box, TextField, Button, Typography } from '@mui/material';
-import { LoginUser, SignupUser } from '../redux/product/user.slice';
+import { LoginUser, SignupUser } from '../redux/user.slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
