@@ -8,8 +8,11 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@mui/material';
-import { deleteCategory, updateCategory } from '../redux/product/category.slice';
+import { deleteCategory, updateCategory } from '../redux/category.slice';
 import CategoryModal from './CategoryModel';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { clearError } from '../redux/user.slice';
 
 export default function CategoryTable() {
   const rows = useSelector(state => state.category.data)
@@ -18,15 +21,16 @@ export default function CategoryTable() {
   const {status, error} =useSelector(state => state.category)
   const [open, setOpen] = React.useState(false);
 
-  React.useEffect(()=>{  
-    console.log(newCategory)
-  },[newCategory])
-
+  React.useEffect(() => {
+    if (status === 'succeeded') {
+      toast.success('Login successful!');
+    } else if (status === 'failed') {
+      toast.error(error || 'Login failed. Please try again.');
+      dispatch(clearError());
+    }
+  }, [status, error, dispatch]);
   if (status === 'loading') {
     return <div>Loading...</div>;
-  }
-  if(error){
-    return <div>{error}</div>;
   }
 
   const handleEdit = async (data) =>{
@@ -46,6 +50,7 @@ export default function CategoryTable() {
   };
   return (
     <>
+    <ToastContainer />
       <CategoryModal  setNewCategory={setNewCategory} newCategory={newCategory} open={open} setOpen={setOpen}/>
     <TableContainer component={Paper} sx={{marginTop : "5rem"}}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">

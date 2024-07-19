@@ -9,7 +9,7 @@ import Paper from '@mui/material/Paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@mui/material';
 import ProductModel from './productModel';
-import { deleteProduct } from '../redux/product/product.slice';
+import { deleteProduct } from '../redux/product.slice';
 
 export default function ProductTable() {
     const dispatch = useDispatch();

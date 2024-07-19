@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts } from './redux/product/product.slice';
-import { fetchCategory } from './redux/product/category.slice';
-import { fetchGood } from './redux/product/good.slice';
-import { fetchCompany } from './redux/product/company.slice';
+import { fetchProducts } from './redux/product.slice';
+import { fetchCategory } from './redux/category.slice';
+import { fetchGood } from './redux/good.slice';
+import { fetchCompany } from './redux/company.slice';
 import Home from './pages/Home';
 import { BrowserRouter , Navigate, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -12,7 +12,7 @@ import { Category } from './pages/Category';
 import Company from './pages/Company';
 import Good from './pages/Good';
 import Login from './pages/Login';
-import { loadUserFromStorage } from './redux/product/user.slice';
+import { loadUserFromStorage } from './redux/user.slice';
 import SignUp from './pages/Signup';
 
 function App() {

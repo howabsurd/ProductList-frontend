@@ -6,7 +6,7 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/system';
 import { useDispatch } from 'react-redux';
-import { createGood, updateGood } from '../redux/product/good.slice';
+import { createGood, updateGood } from '../redux/good.slice';
 
 const style = {
   position: 'absolute',

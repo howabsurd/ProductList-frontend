@@ -6,7 +6,10 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/system';
 import { useDispatch } from 'react-redux';
-import { createCategory, updateCategory } from '../redux/product/category.slice';
+import { createCategory, updateCategory } from '../redux/category.slice';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const style = {
   position: 'absolute',
@@ -39,6 +42,7 @@ export default function CategoryModal({ setNewCategory, newCategory, open, setOp
     setErrors({
       categoryName: false,
     });
+    setNewCategory({})
   };
 
   const handleChange = (e) => {
@@ -64,8 +68,8 @@ export default function CategoryModal({ setNewCategory, newCategory, open, setOp
     // If form is valid, submit
     if (formValid) {
       // Add your form submission logic here
-      if(!newCategory.category_id)dispatch(createCategory(newCategory))
-        else{dispatch(updateCategory(newCategory))}
+      if(!newCategory?.category_id){dispatch(createCategory(newCategory)); setNewCategory({});}
+        else{dispatch(updateCategory(newCategory)); setNewCategory({});}
       setNewCategory({})
       handleClose();
     }
@@ -84,7 +88,7 @@ export default function CategoryModal({ setNewCategory, newCategory, open, setOp
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Create Category
+          {newCategory?.category_id ? 'Update Category' : 'Create Category'}
           </Typography>
           <FormContainer onSubmit={handleSubmit}>
             <TextField
@@ -104,6 +108,7 @@ export default function CategoryModal({ setNewCategory, newCategory, open, setOp
           </FormContainer>
         </Box>
       </Modal>
+      <ToastContainer />
     </div>
   );
 }

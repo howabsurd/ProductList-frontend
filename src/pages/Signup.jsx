@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Container, Box, TextField, Button, Typography } from '@mui/material';
-import { LoginUser, SignupUser } from '../redux/product/user.slice';
+import {  SignupUser } from '../redux/user.slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { data , status, error } = useSelector(state => state.user);
+  const { error } = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {

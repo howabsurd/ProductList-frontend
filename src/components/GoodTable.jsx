@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@mui/material';
-import { deleteGood, updateGood } from '../redux/product/good.slice';
+import { deleteGood, updateGood } from '../redux/good.slice';
 import GoodModal from './GoodModel';
 
 export default function GoodTable() {
@@ -25,9 +25,9 @@ export default function GoodTable() {
   if (status === 'loading') {
     return <div>Loading...</div>;
   }
-  if(error){
-    return <div>{error}</div>;
-  }
+  // if(error){
+  //   return <div>{error}</div>;
+  // }
 
   const handleEdit = async (data) =>{
     setOpen(true)

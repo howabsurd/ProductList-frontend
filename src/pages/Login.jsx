@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Box, TextField, Button, Typography } from '@mui/material';
-import { LoginUser } from '../redux/product/user.slice';
+import { LoginUser } from '../redux/user.slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -17,8 +19,17 @@ function Login() {
     setPassword("");
   };
 
+  useEffect(() => {
+    if (status === 'succeeded') {
+      toast.success('Login successful!');
+    } else if (status === 'failed') {
+      toast.error(error || 'Login failed. Please try again.');
+    }
+  }, [status, error]);
+
   return (
     <Container component="main" maxWidth="xs">
+      <ToastContainer />
       <Box
         sx={{
           marginTop: 8,

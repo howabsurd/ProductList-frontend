@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import {env, authURI} from "../../config/keys"
+import {env, authURI} from "../config/keys"
 
 const initialState = {
   data: JSON.parse(localStorage.getItem('user')) || null,
@@ -56,6 +56,9 @@ const userSlice = createSlice({
       localStorage.removeItem('user');
       state.data = null;
       state.status = 'idle';
+    },
+    clearError(state) {
+      state.error = null;
     }
   },
   extraReducers: (builder) => {
@@ -86,7 +89,7 @@ const userSlice = createSlice({
   }
 });
 
-export const { loadUserFromStorage, logout } = userSlice.actions;
+export const { loadUserFromStorage, logout, clearError } = userSlice.actions;
 
 export default userSlice.reducer;
 

@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@mui/material';
-import { deleteCompany, updateCompany } from '../redux/product/company.slice';
+import { deleteCompany, updateCompany } from '../redux/company.slice';
 import CompanyModal from './CompanyModel';
 
 export default function CompanyTable() {
@@ -18,16 +18,13 @@ export default function CompanyTable() {
   const {status, error} =useSelector(state => state.company)
   const [open, setOpen] = React.useState(false);
 
-  React.useEffect(()=>{  
-    console.log(newCompany)
-  },[newCompany])
-
   if (status === 'loading') {
     return <div>Loading...</div>;
   }
-  if(error){
-    return <div>{error}</div>;
-  }
+
+  // if(error){
+  //   return <div>{error}</div>;
+  // }
 
   const handleEdit = async (data) =>{
     setOpen(true)
